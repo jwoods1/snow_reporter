@@ -10,8 +10,9 @@ ADD package.json .
 ADD yarn.lock .
 RUN yarn install --no-progress
 ADD . .
-RUN go get ./...
-RUN buffalo build --static -o /bin/app
+RUN GO111MODULE=on go mod tidy
+RUN GO111MODULE=on go get ./...
+RUN GO111MODULE=on buffalo build --static -o /bin/app
 
 FROM alpine
 RUN apk add --no-cache curl
