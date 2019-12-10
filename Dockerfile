@@ -10,7 +10,6 @@ ADD package.json .
 ADD yarn.lock .
 RUN yarn install --no-progress
 ADD . .
-ENV GO111MODULES=on
 RUN go get ./...
 RUN buffalo build --static -o /bin/app
 
