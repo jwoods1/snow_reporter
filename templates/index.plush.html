@@ -1,64 +1,141 @@
-<header>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-1 col-sm-2 col-xs-2 logo">
-        <a href="<%= rootPath() %>"><img src="<%= rootPath() %>assets/images/logo.svg" alt=""></a>
-      </div>
-      <div class="col-md-9 col-sm-9 col-xs-10 titles">
-        <h1><%= t("welcome_greeting") %></h1>
-        <h2>
-          <a href="https://github.com/gobuffalo/buffalo"><i class="fab fa-github" aria-hidden="true"></i> https://github.com/gobuffalo/buffalo</a>
-        </h2>
-        <h2 class="documentation">
-          <a href="http://gobuffalo.io/"><i class="fa fa-book" aria-hidden="true"></i> Documentation</a>
-        </h2>
-      </div>
-    </div>
-  </div>
 
-</header>
+<div class="row mt-3">
+    <%= for (s) in stations { %>
+      <%= if (len(s.DailyReports) > 0) { %>
+      <% let last = lastReport(s.DailyReports) %>
+        <div class="col-md-4 mb-2">
+          <!-- Card -->
+          <div class="card weather-card">
+            <!-- Card content -->
+            <div class="card-body pb-3">
+              <!-- Title -->
+              <h4 class="card-title font-weight-bold"><i class="fas fa-mountain"></i> <%= s.Name %> </h4>
+              <p><span class="font-small text-muted">
+                  <%= if (s.StationID == 550 ) { %>
+                    Idaho City Area
+                  <% } %>
+                  <%= if (s.StationID == 546 || s.StationID == 860) { %>
+                    Island Area
+                  <% } %>
+                  <%= if (s.StationID == 306 || s.StationID == 830) { %>
+                    Trinity Mt. Area
+                  <% } %>
+                  <%= if (s.StationID == 978 ) { %>
+                    Bogus
+                  <% } %>
+                  <%= if (s.StationID == 439 || s.StationID == 338) { %>
+                    Warm Lake Area
+                  <% } %>
+                  <%= if (s.StationID == 782 || s.StationID == 1016) { %>
+                    West Mt.
+                  <% } %>
+                  <%= if (s.StationID == 370 || s.StationID == 319) { %>
+                    McCall Area
+                  <% } %>
+              </span></p>
+              <!-- Text -->
+              <!-- <p class="card-text">Mon, 12:30 PM, Mostly Sunny</p> -->
+              <div class="d-flex justify-content-between">
+                <p class="display-1 degree"><%= last.SnowDepth %> inch</p>
+                <i class="fas fa-sun-o fa-5x pt-3 amber-text"></i>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p>
+                  <%= if (last.SnowChange > 0.0){ %>
+                    <i class="fas fa-snowflake fa-lg text-info pr-2"></i>
+                  <% } %>
+                  <%= if (last.SnowChange == 0.0){ %>
+                    <i class="fas fa-snowflake  fa-lg text-gray pr-2"></i>
+                  <% } %>
+                  <%= if (last.SnowChange < 0.0){ %>
+                    <i class="fas fa-snowflake  fa-lg text-danger pr-2"></i>
+                  <% } %>
+                  Change: <%= last.SnowChange %> inch</p>
+              </div>
+              <div class="d-flex justify-content-between">
+                  <p class="text-muted font-small">Last Updated:  <%= timeFix(last.Date) %></p>
+              </div>
+              <!-- <div class="progress md-progress">
+              <div class="progress-bar black" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+            </div> -->
+              <!-- <ul class="list-unstyled d-flex justify-content-between font-small text-muted mb-4">
+              <li class="pl-4">8AM</li>
+              <li>11AM</li>
+              <li>2PM</li>
+              <li>5PM</li>
+              <li class="pr-4">8PM</li>
+            </ul> -->
+      
+              <div class="collapse-content">
+              <div class="collapse" id="<%= s.StationID %>">
+                <table class="table table-borderless table-sm mb-0">
+                  <tbody>
+                    <tr>
+                      <td class="font-weight-normal align-middle">Tuesday</td>
+                      <td class="float-right font-weight-normal">
+                        <p class="mb-1">24&deg;<span class="text-muted">/12&deg;</span></p>
+                      </td>
+                      <td class="float-right mr-3">
+                        <i class="fas fa-sun fa-lg amber-text"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-weight-normal align-middle">Wednesday</td>
+                      <td class="float-right font-weight-normal">
+                        <p class="mb-1">19&deg;<span class="text-muted">/10&deg;</span></p>
+                      </td>
+                      <td class="float-right mr-3">
+                        <i class="fas fa-cloud-sun-rain fa-lg text-info"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-weight-normal align-middle">Thursday</td>
+                      <td class="float-right font-weight-normal">
+                        <p class="mb-1">23&deg;<span class="text-muted">/15&deg;</span></p>
+                      </td>
+                      <td class="float-right mr-3">
+                        <i class="fas fa-sun fa-lg amber-text"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-weight-normal align-middle">Friday</td>
+                      <td class="float-right font-weight-normal">
+                        <p class="mb-1">26&deg;<span class="text-muted">/19&deg;</span></p>
+                      </td>
+                      <td class="float-right mr-3">
+                        <i class="fas fa-sun fa-lg amber-text"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-weight-normal align-middle">Saturday</td>
+                      <td class="float-right font-weight-normal">
+                        <p class="mb-1">20&deg;<span class="text-muted">/16&deg;</span></p>
+                      </td>
+                      <td class="float-right mr-3">
+                        <i class="fas fa-cloud fa-lg text-info"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="font-weight-normal align-middle">Sunday</td>
+                      <td class="float-right font-weight-normal">
+                        <p class="mb-1">22&deg;<span class="text-muted">/13&deg;</span></p>
+                      </td>
+                      <td class="float-right mr-3">
+                        <i class="fas fa-cloud-sun fa-lg text-info"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr class="">
+                <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 deep-purple-text collapsed" data-toggle="collapse" href="#<%= s.StationID %>" aria-expanded="false" aria-controls="collapseExample">More</a>
+            </div>
+            </div>
+          </div>
+          <!-- Card -->
+        </div>
+        <% } %>
+      <% } %>
+  
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="subtitle">
-      <div class="container">
-        <h3>Defined Routes</h3>
-      </div>
-    </div>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr text-align="left">
-            <th class="centered">METHOD</th>
-            <th>PATH</th>
-            <th>NAME</th>
-            <th>HANDLER</th>
-          </tr>
-        </thead>
-        <tbody>
-
-          <%= for (r) in routes { %>
-            <tr>
-              <td class="centered">
-                <%= r.Method %>
-              </td>
-              <td>
-                <%= if (r.Method != "GET" || r.Path ~= "{") {
-                  return r.Path
-                } else {
-                  return linkTo(r.Path, {body: r.Path})
-                } %>
-              </td>
-              <td>
-                <%= r.PathName %>
-              </td>
-              <td><code><%= r.HandlerName %></code></td>
-            </tr>
-          <% } %>
-
-        </tbody>
-      </table>
-    </div>
-  </div>
 </div>
-<div class="foot"> <span> Powered by <a href="http://gobuffalo.io/">gobuffalo.io</a></span> </div>

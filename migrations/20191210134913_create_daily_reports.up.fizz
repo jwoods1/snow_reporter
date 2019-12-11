@@ -1,0 +1,8 @@
+create_table("daily_reports") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("date", "timestamp", {})
+	t.Column("station_id", "uuid", {})
+	t.Column("snow_depth", "decimal", {})
+	t.Column("snow_change", "decimal", {})
+	t.Timestamps()
+}

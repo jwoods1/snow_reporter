@@ -1,0 +1,10 @@
+create_table("stations") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("station_id", "int", {})
+	t.Column("name", "string", {})
+	t.Column("state", "string", {})
+	t.Column("elevation", "integer", {})
+	t.Column("lat", "decimal", {})
+	t.Column("long", "decimal", {})
+	t.Timestamps()
+}

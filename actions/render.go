@@ -3,6 +3,8 @@ package actions
 import (
 	"github.com/gobuffalo/buffalo/render"
 	"github.com/gobuffalo/packr/v2"
+	"snow_watch/models"
+	"time"
 )
 
 var r *render.Engine
@@ -23,6 +25,18 @@ func init() {
 			// below and import "github.com/gobuffalo/helpers/forms"
 			// forms.FormKey:     forms.Form,
 			// forms.FormForKey:  forms.FormFor,
+			"timeFix":    timeFix,
+			"lastReport": lastReport,
 		},
 	})
+}
+func timeFix(d time.Time) string {
+	return d.Format("January 02, 2006")
+}
+func lastReport(reports []models.DailyReport) models.DailyReport {
+	if len(reports) > 0 {
+		return reports[len(reports)-1]
+
+	}
+	return models.DailyReport{}
 }
