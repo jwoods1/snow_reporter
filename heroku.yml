@@ -4,8 +4,8 @@ build:
 
 release:
   command:
-    - /bin/app migrate
-    - /bin/app task reports:stations
-    - /bin/app task reports:seed
+     /bin/app migrate
+     /bin/app task reports:stations
+     /bin/app task reports:seed
   image: web
 
