@@ -1,8 +1,0 @@
-<div class="page-header">
-  <h1>New DailyReport</h1>
-</div>
-
-<%= formFor(dailyReport, {action: dailyReportsPath(), method: "POST"}) { %>
-  <%= partial("daily_reports/form.html") %>
-  <%= linkTo(dailyReportsPath(), {class: "btn btn-warning", "data-confirm": "Are you sure?", body: "Cancel"}) %>
-<% } %>
