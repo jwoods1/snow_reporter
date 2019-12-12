@@ -9,30 +9,8 @@
             <!-- Card content -->
             <div class="card-body pb-3">
               <!-- Title -->
-              <h4 class="card-title font-weight-bold"><i class="fas fa-mountain"></i> <%= s.Name %> </h4>
-              <p><span class="font-small text-muted">
-                  <%= if (s.StationID == 550 ) { %>
-                    Idaho City Area
-                  <% } %>
-                  <%= if (s.StationID == 546 || s.StationID == 860) { %>
-                    Island Area
-                  <% } %>
-                  <%= if (s.StationID == 306 || s.StationID == 830) { %>
-                    Trinity Mt. Area
-                  <% } %>
-                  <%= if (s.StationID == 978 ) { %>
-                    Bogus
-                  <% } %>
-                  <%= if (s.StationID == 439 || s.StationID == 338) { %>
-                    Warm Lake Area
-                  <% } %>
-                  <%= if (s.StationID == 782 || s.StationID == 1016) { %>
-                    West Mt.
-                  <% } %>
-                  <%= if (s.StationID == 370 || s.StationID == 319) { %>
-                    McCall Area
-                  <% } %>
-              </span></p>
+              <h4 class="card-title font-weight-bold"><i class="fas fa-mountain"></i> <%= s.Name %>.</h4>
+              <h5 class="text-muted"> <%= s.Elevation %>ft</h5>
               <!-- Text -->
               <!-- <p class="card-text">Mon, 12:30 PM, Mostly Sunny</p> -->
               <div class="d-flex justify-content-between">
@@ -53,82 +31,33 @@
                   Change: <%= last.SnowChange %> inch</p>
               </div>
               <div class="d-flex justify-content-between">
-                  <p class="text-muted font-small">Last Updated:  <%= timeFix(last.Date) %></p>
+                  <p class="text-muted font-small"><%= timeFix(last.Date) %></p>
               </div>
-              <!-- <div class="progress md-progress">
-              <div class="progress-bar black" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-            </div> -->
-              <!-- <ul class="list-unstyled d-flex justify-content-between font-small text-muted mb-4">
-              <li class="pl-4">8AM</li>
-              <li>11AM</li>
-              <li>2PM</li>
-              <li>5PM</li>
-              <li class="pr-4">8PM</li>
-            </ul> -->
-      
               <div class="collapse-content">
-              <div class="collapse" id="<%= s.StationID %>">
+              <div class="collapse" id="days-<%= s.StationID %>">
                 <table class="table table-borderless table-sm mb-0">
+                  <thead>
+                    <th>Date</th>
+                    <th>Depth</th>
+                    <th>Change</th>
+                  </thead>
                   <tbody>
+                    <%= for(r) in reverseOrder(s.DailyReports){ %>
+                      <%= if (timeFix(r.Date)!= timeFix(last.Date)) { %>
                     <tr>
-                      <td class="font-weight-normal align-middle">Tuesday</td>
+                      <td class="font-weight-normal align-middle"><%= timeFix(r.Date) %></td>
+                      <td class="font-weight-normal align-middle" ><%= r.SnowDepth %>in.</td>
                       <td class="float-right font-weight-normal">
-                        <p class="mb-1">24&deg;<span class="text-muted">/12&deg;</span></p>
-                      </td>
-                      <td class="float-right mr-3">
-                        <i class="fas fa-sun fa-lg amber-text"></i>
+                               <%= r.SnowChange %> in.
                       </td>
                     </tr>
-                    <tr>
-                      <td class="font-weight-normal align-middle">Wednesday</td>
-                      <td class="float-right font-weight-normal">
-                        <p class="mb-1">19&deg;<span class="text-muted">/10&deg;</span></p>
-                      </td>
-                      <td class="float-right mr-3">
-                        <i class="fas fa-cloud-sun-rain fa-lg text-info"></i>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="font-weight-normal align-middle">Thursday</td>
-                      <td class="float-right font-weight-normal">
-                        <p class="mb-1">23&deg;<span class="text-muted">/15&deg;</span></p>
-                      </td>
-                      <td class="float-right mr-3">
-                        <i class="fas fa-sun fa-lg amber-text"></i>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="font-weight-normal align-middle">Friday</td>
-                      <td class="float-right font-weight-normal">
-                        <p class="mb-1">26&deg;<span class="text-muted">/19&deg;</span></p>
-                      </td>
-                      <td class="float-right mr-3">
-                        <i class="fas fa-sun fa-lg amber-text"></i>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="font-weight-normal align-middle">Saturday</td>
-                      <td class="float-right font-weight-normal">
-                        <p class="mb-1">20&deg;<span class="text-muted">/16&deg;</span></p>
-                      </td>
-                      <td class="float-right mr-3">
-                        <i class="fas fa-cloud fa-lg text-info"></i>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="font-weight-normal align-middle">Sunday</td>
-                      <td class="float-right font-weight-normal">
-                        <p class="mb-1">22&deg;<span class="text-muted">/13&deg;</span></p>
-                      </td>
-                      <td class="float-right mr-3">
-                        <i class="fas fa-cloud-sun fa-lg text-info"></i>
-                      </td>
-                    </tr>
+                    <% } %>
+                    <% } %>
                   </tbody>
                 </table>
               </div>
               <hr class="">
-                <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 deep-purple-text collapsed" data-toggle="collapse" href="#<%= s.StationID %>" aria-expanded="false" aria-controls="collapseExample">More</a>
+                <a class="btn btn-flat red-text p-1 my-1 mr-0 mml-1 deep-purple-text collapsed" data-toggle="collapse" href="#days-<%= s.StationID %>" aria-expanded="false" aria-controls="#<%= s.StationID %>">More</a>
             </div>
             </div>
           </div>

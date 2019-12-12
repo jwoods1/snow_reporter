@@ -25,8 +25,9 @@ func init() {
 			// below and import "github.com/gobuffalo/helpers/forms"
 			// forms.FormKey:     forms.Form,
 			// forms.FormForKey:  forms.FormFor,
-			"timeFix":    timeFix,
-			"lastReport": lastReport,
+			"timeFix":      timeFix,
+			"lastReport":   lastReport,
+			"reverseOrder": reverseOrder,
 		},
 	})
 }
@@ -39,4 +40,11 @@ func lastReport(reports []models.DailyReport) models.DailyReport {
 
 	}
 	return models.DailyReport{}
+}
+func reverseOrder(a []models.DailyReport) []models.DailyReport {
+	for i := len(a)/2 - 1; i >= 0; i-- {
+		opp := len(a) - 1 - i
+		a[i], a[opp] = a[opp], a[i]
+	}
+	return a
 }
