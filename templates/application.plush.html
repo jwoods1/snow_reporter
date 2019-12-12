@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="utf-8">
     <title>Buffalo - Snow Watch</title>
     <%= stylesheetTag("application.css") %>
     <meta name="csrf-param" content="authenticity_token" />
     <meta name="csrf-token" content="<%= authenticity_token %>" />
-    <link rel="icon" href="<%= assetPath("images/favicon.ico") %>">
+    <meta name="theme-color" content="#ffffff">
+	  <meta name="application-name" content="Twisted Backcountry">
+  	<link rel="shortcut icon" href="/favicons/favicon.ico">
+	  <link rel="icon" type="image/png" sizes="32x32" href="<%= assetPath("images/favicons/favicon-32x32.png") %>">
+	  <link rel="icon" type="image/png" sizes="16x16" href="<%= assetPath("images/favicons/favicon-16x16.png") %>">
+	
+	  <!-- Apple -->
+	  <meta name="apple-mobile-web-app-title" content="Twisted Backcountry">
+	
+	  <link rel="apple-touch-icon" sizes="180x180" href="<%= assetPath("images/favicons/apple-touch-icon.png") %>">
   </head>
   <body>
 
