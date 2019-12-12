@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="utf-8">
@@ -8,16 +9,35 @@
     <meta name="csrf-param" content="authenticity_token" />
     <meta name="csrf-token" content="<%= authenticity_token %>" />
     <meta name="theme-color" content="#ffffff">
-	  <meta name="application-name" content="Twisted Backcountry">
-  	<link rel="shortcut icon" href="/favicons/favicon.ico">
-	  <link rel="icon" type="image/png" sizes="32x32" href="<%= assetPath("images/favicons/favicon-32x32.png") %>">
-	  <link rel="icon" type="image/png" sizes="16x16" href="<%= assetPath("images/favicons/favicon-16x16.png") %>">
-	
-	  <!-- Apple -->
-	  <meta name="apple-mobile-web-app-title" content="Twisted Backcountry">
-	
-	  <link rel="apple-touch-icon" sizes="180x180" href="<%= assetPath("images/favicons/apple-touch-icon.png") %>">
+    <meta name="application-name" content="Twisted Backcountry">
+    <link rel="shortcut icon" href="/favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= assetPath("images/favicons/favicon-16x16.png") %>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= assetPath("images/favicons/favicon-32x32.png") %>">
+    <link rel="icon" type="image/png" sizes="64x64" href="<%= assetPath("images/favicons/favicon-64x64.png") %>">
+    <link rel="icon" type="image/png" sizes="128x128" href="<%= assetPath("images/favicons/favicon-128x128.png") %>">
+    <link rel="icon" type="image/png" sizes="152x152" href="<%= assetPath("images/favicons/favicon-152x152.png") %>">
+    <link rel="icon" type="image/png" sizes="192x192" href="<%= assetPath("images/favicons/favicon-192x192.png") %>">
+    <link rel="icon" type="image/png" sizes="196x196" href="<%= assetPath("images/favicons/favicon-196x196.png") %>">
+
+    <!-- Apple -->
+    <meta name="apple-mobile-web-app-title" content="Twisted Backcountry">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= assetPath("images/favicons/apple-touch-icon.png") %>">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154512702-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154512702-1');
+    </script>
   </head>
+
   <body>
 
     <div class="container-fluid">
@@ -27,4 +47,5 @@
 
     <%= javascriptTag("application.js") %>
   </body>
+
 </html>
